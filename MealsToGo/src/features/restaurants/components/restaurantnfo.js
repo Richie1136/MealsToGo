@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 const Title = styled.Text`
 padding: 16px;
-color: rebeccapurple
+color: ${(props) => props.theme.colors.ui.primary}
 `
 const RestaurantCard = styled(Card)`
 background-color: white
