@@ -4,12 +4,13 @@ import styled from 'styled-components/native';
 
 const Title = styled.Text`
 padding: 16px;
+color: rebeccapurple
 `
 const RestaurantCard = styled(Card)`
-backgroundColor: white
+background-color: white
 `
 const RestaurantCardCover = styled(Card.Cover)`
-backgroundColor: white;
+background-color: white;
 padding: 20px;
 `
 
