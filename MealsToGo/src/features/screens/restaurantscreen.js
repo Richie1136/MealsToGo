@@ -10,12 +10,11 @@ flex: 1;
 ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 const SearchContainer = styled.View`
-padding: 16px;
+padding: ${({ theme }) => theme.space[3]};
 `;
 const ListContainer = styled.View`
 flex: 1;
-padding: 16px;
-background-color: blue;
+padding: ${({ theme }) => theme.space[3]};
 `;
 
 export const RestaurantsScreen = () => (
