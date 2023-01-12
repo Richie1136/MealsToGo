@@ -7,7 +7,10 @@ import { useFonts as useLato, Lato_400Regular } from '@expo-google-fonts/lato';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text } from 'react-native';
-
+import { SafeArea } from './src/components/utility/safe-area';
+import { Ionicons } from '@expo/vector-icons'
+import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context'
+import { LocationContextProvider } from './src/services/location/location.context'
 
 export default function App() {
 
@@ -24,31 +27,57 @@ export default function App() {
   }
 
   const MapScreen = () => (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
+    <SafeArea>
       <Text>Map</Text>
-    </View>
+    </SafeArea>
   )
 
   const SettingsScreen = () => (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
+    <SafeArea>
       <Text>Settings</Text>
-    </View>
+    </SafeArea>
   )
 
   const Tab = createBottomTabNavigator()
 
+  const TAB_ICON = {
+    Restaurants: "fast-food",
+    Settings: "settings",
+    Map: "md-map"
+  }
+  const createScreenOptions = ({ route }) => {
+    const iconName = TAB_ICON[route.name]
+    return {
+      tabBarIcon: ({ size, color }) => (
+        <Ionicons name={iconName} size={size} color={color} />
 
-  return (
-    <>
-      <ThemeProvider theme={theme}>
+      )
+    }
+  }
+
+  const MyTabs = () => (
+    <LocationContextProvider>
+      <RestaurantsContextProvider>
         <NavigationContainer>
-          <Tab.Navigator>
+          <Tab.Navigator screenOptions={createScreenOptions}
+            tabBarOption={{
+              tabBarActiveTintColor: 'tomato',
+              tabBarInactiveTintColor: 'gray'
+            }}
+          >
             <Tab.Screen name='Restaurants' component={RestaurantsScreen} />
             <Tab.Screen name='Map' component={MapScreen} />
             <Tab.Screen name='Settings' component={SettingsScreen} />
           </Tab.Navigator>
         </NavigationContainer>
-        {/* <RestaurantsScreen /> */}
+      </RestaurantsContextProvider>
+    </LocationContextProvider>
+  )
+
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <MyTabs />
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
 

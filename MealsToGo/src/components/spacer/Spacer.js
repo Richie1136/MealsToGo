@@ -18,7 +18,6 @@ const getVariant = (position, size, theme) => {
   const sizeIndex = sizes[size]
   const property = positions[position]
   const value = theme.space[sizeIndex]
-  console.log(value)
   return `${property}:${value}`
 }
 
