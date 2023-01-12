@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useMemo, useContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { LocationContext } from "../location/location.context";
 
 
@@ -36,8 +36,6 @@ export const RestaurantsContextProvider = ({ children }) => {
       retrieveRestaurants(locationString);
     }
   }, [location])
-
-  console.log(restaurants)
 
   return (
     <RestaurantsContext.Provider value={{ restaurants, isLoading, error }}>
